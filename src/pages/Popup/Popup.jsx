@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './Popup.css';
+// import secrets from '../../../secrets.development';
 
+// Use the secrets
 const Popup = () => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
