@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Popup.css';
 
 const Popup = () => {
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState('');
 
+  // Load messages from local storage when the component mounts
+  useEffect(() => {
+    const storedMessages = localStorage.getItem('chatMessages');
+    if (storedMessages) {
+      setMessages(JSON.parse(storedMessages));
+    }
+  }, []);
+
+  // Save messages to local storage whenever messages change
+  useEffect(() => {
+    localStorage.setItem('chatMessages', JSON.stringify(messages));
+  }, [messages]);
+
   const handleSendMessage = () => {
     if (inputMessage.trim() !== '') {
-      setMessages([...messages, { text: inputMessage, sender: 'user' }]);
+      const newMessage = { text: inputMessage, sender: 'user' };
+      setMessages([...messages, newMessage]);
       setInputMessage('');
       // TODO: Add logic to send message to AI and receive response
     }
