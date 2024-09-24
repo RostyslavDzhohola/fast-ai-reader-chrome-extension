@@ -218,6 +218,12 @@ var options = {
   infrastructureLogging: {
     level: 'info',
   },
+  devServer: {
+    headers: {
+      'Content-Security-Policy':
+        "script-src 'self' 'unsafe-eval' 'unsafe-inline'; object-src 'self'",
+    },
+  },
 };
 
 if (env.NODE_ENV === 'development') {
